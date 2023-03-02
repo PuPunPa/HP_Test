@@ -24,6 +24,7 @@ int main(int argc, char** argv){
     cout << "(" << argv[1] << "x3) + (" << argv[2] << "x2) + (" << argv[3] << "x) + (" << argv[4] << ") = 0" << endl;
     
     for(int i = 0; i < 1000000; i++){
+        //-i and i+1 lets me skip a double positive in the scenario that X=0 is a root of the equationm without using if statements
         int fxFromLeft = Solve(a, b, c, d, -i);
         int fxFromRight = Solve(a, b, c, d, i+1);
         if(fxFromRight == 0){
