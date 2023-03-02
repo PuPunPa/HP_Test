@@ -4,7 +4,7 @@
 
 using namespace std;
 
-double Solve(int a, int b, int c, int d, double x){
+double Solve(int a, int b, int c, int d, int x){
     double fx = (a*pow(x, 3) + b*pow(x, 2) + c*x + d);
     return fx;
 }
@@ -19,30 +19,30 @@ int main(int argc, char** argv){
     sscanf(argv[2], "%d", &b);
     sscanf(argv[3], "%d", &c);
     sscanf(argv[4], "%d", &d);
-    int x=0;
+    int turns = 0;
+    int roots[3];
     cout << "(" << argv[1] << "x3) + (" << argv[2] << "x2) + (" << argv[3] << "x) + (" << argv[4] << ") = 0" << endl;
-    cout << "{ ";
-    while(true){
-        int fx = Solve(a, b, c, d, x);
-        if(fx == 0){
-            cout << x <<", ";
+    
+    for(int i = 0; i < 1000000; i++){
+        int fxFromLeft = Solve(a, b, c, d, -i);
+        int fxFromRight = Solve(a, b, c, d, i+1);
+        if(fxFromRight == 0){
+            cout << "fx(" << i+1 << "): " << fxFromRight << endl;
+            roots[turns] = i+1;
+            turns++;
         }
-        else if(fx < 0){
-            break;
+        if(fxFromLeft == 0){
+            cout << "fx(" << -i << "): " << fxFromRight << endl;
+            roots[turns] = -i;
+            turns++;
         }
-        x--;
     }
-    x=1;
-    while(true){
-        int fx = Solve(a, b, c, d, x);
-        if(fx == 0){
-            cout << x <<", ";
-        }
-        else if(fx > 0){
-            break;
-        }
-        x++;
+
+    if(turns == 3){
+        cout << "{" << roots[0] << ", " << roots[1] << ", " << roots[2] << "}" << endl;
     }
-    cout << "}";
+    else {
+        cout << "{ }" << endl;
+    }
     return 0;
 }
