@@ -38,11 +38,10 @@ int main(int argc, char** argv){
         }
     }
 
-    if(turns == 3){
-        cout << "{" << roots[0] << ", " << roots[1] << ", " << roots[2] << "}" << endl;
+    cout << "{";
+    for(int i = 0; i < turns; i++){
+        cout << roots[i] << ", ";
     }
-    else {
-        cout << "{ }" << endl;
-    }
+    cout << "}" << endl;
     return 0;
 }
