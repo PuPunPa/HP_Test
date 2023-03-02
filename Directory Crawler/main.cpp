@@ -35,6 +35,7 @@ void Crawl(string path){
     }
     
     output << "]}";
+    output.close();
 }
 
 
